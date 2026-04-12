@@ -9,6 +9,7 @@ namespace ExaminationSystem.Infrastructure.Persistence;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
 {
+    public DbSet<OtpCode> OtpCodes { get; set; }
     public DbSet<Diploma> Diplomas { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Quiz> Quizzes { get; set; }

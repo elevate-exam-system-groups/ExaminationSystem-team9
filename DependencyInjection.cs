@@ -1,9 +1,17 @@
 ﻿using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.Domain.Interfaces;
+using ExaminationSystem.Domain.Interfaces.Authentication;
 using ExaminationSystem.Infrastructure.Implementations;
+using ExaminationSystem.Infrastructure.Implementations.Authentication;
 using ExaminationSystem.Infrastructure.Persistence;
+using ExaminationSystem.Settings;
+using FluentValidation;
+using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using System.Reflection;
 
 namespace ExaminationSystem;
 
@@ -20,8 +28,34 @@ public static class DependencyInjection
         services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+        services
+            .AddFluentValidationConfig()
+            .AddMapsterConfig();
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IEmailSender, EmailService>();
+
+        services.Configure<MailSettings>(configuration.GetSection(nameof(MailSettings)));
+
+        return services;
+    }
+
+    private static IServiceCollection AddMapsterConfig(this IServiceCollection services)
+    {
+        //add mapster
+        var mappingConfig = TypeAdapterConfig.GlobalSettings;
+        mappingConfig.Scan(Assembly.GetExecutingAssembly());
+
+        services.AddSingleton<IMapper>(new Mapper(mappingConfig));
+
+        return services;
+    }
+    private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
+    {
+
+        // failure 
+        services.AddFluentValidationAutoValidation()
+            .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         return services;
     }
