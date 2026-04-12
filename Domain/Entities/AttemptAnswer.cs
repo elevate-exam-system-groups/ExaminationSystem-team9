@@ -1,6 +1,4 @@
-﻿using ExaminationSystem.Domain.Entities.Common;
-
-namespace ExaminationSystem.Domain.Entities;
+﻿namespace ExaminationSystem.Domain.Entities;
 
 public class AttemptAnswer : BaseEntity
 {

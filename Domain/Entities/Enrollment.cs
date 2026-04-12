@@ -1,5 +1,4 @@
 ﻿using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.Domain.Entities.Common;
 
 namespace ExaminationSystem.Domain.Entities;
 
