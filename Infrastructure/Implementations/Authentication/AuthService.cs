@@ -1,8 +1,8 @@
 ﻿using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.Domain.Errors;
 using ExaminationSystem.Domain.Interfaces.Authentication;
+using ExaminationSystem.Errors.Authentication;
 using ExaminationSystem.Infrastructure.Persistence;
 using Mapster;
 using Microsoft.AspNetCore.Identity;

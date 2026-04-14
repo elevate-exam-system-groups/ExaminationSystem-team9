@@ -7,5 +7,6 @@ public record GetDiplomaDto(
     string Title,
     string Description,
     DiplomaStatus Status,
-    DateTime DeletedAt
+    DateTime CreatedAt,
+    DateTime UpdatedAt
     );
