@@ -1,6 +1,6 @@
 ﻿using ExaminationSystem.Abstractions;
 
-namespace ExaminationSystem.Domain.Errors;
+namespace ExaminationSystem.Errors.Authentication;
 
 public static class UserError
 {

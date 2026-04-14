@@ -30,6 +30,13 @@ public static class DependencyInjection
         services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+        services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+            });
+
         services
             .AddFluentValidationConfig()
             .AddMapsterConfig();

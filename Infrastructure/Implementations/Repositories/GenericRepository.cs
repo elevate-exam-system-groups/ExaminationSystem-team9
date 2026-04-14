@@ -14,6 +14,8 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
         await _context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
     public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken = default) =>
         await _context.Set<T>().FindAsync(id, cancellationToken);
+    public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
+        await _context.Set<T>().FindAsync(id, cancellationToken);
 
     public async Task<T?> GetByPredicateAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default) =>
         await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate, cancellationToken);
@@ -24,4 +26,7 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
     public void Update(T entity) => _context.Set<T>().Update(entity);
 
     public void SoftDelete(T entity) => _context.Set<T>().Remove(entity);
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        await _context.SaveChangesAsync(cancellationToken);
 }
