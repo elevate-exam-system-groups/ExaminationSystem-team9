@@ -1,7 +1,9 @@
 ﻿using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
+using ExaminationSystem.Domain.Interfaces.Repositories;
 using ExaminationSystem.Infrastructure.Implementations;
 using ExaminationSystem.Infrastructure.Implementations.Authentication;
+using ExaminationSystem.Infrastructure.Implementations.Repositories;
 using ExaminationSystem.Infrastructure.Persistence;
 using ExaminationSystem.Settings;
 using FluentValidation;
@@ -34,8 +36,11 @@ public static class DependencyInjection
 
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IEmailSender, EmailService>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
         services.Configure<MailSettings>(configuration.GetSection(nameof(MailSettings)));
+
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
         return services;
     }
@@ -52,8 +57,6 @@ public static class DependencyInjection
     }
     private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
     {
-
-        // failure 
         services.AddFluentValidationAutoValidation()
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
