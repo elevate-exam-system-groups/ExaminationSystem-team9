@@ -1,5 +1,5 @@
-﻿
-using ExaminationSystem.Features.Quizzes.Common;
+﻿using ExaminationSystem.Abstractions;   
+using ExaminationSystem.Domain.DTOs.QuizResponse;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz;
 
@@ -10,4 +10,4 @@ public record CreateQuizCommand(
     int DurationMinutes,
     double PassScore,
     int? MaxAttempts
-) : MediatR.IRequest<ExaminationSystem.Abstractions.Result<QuizResponse>>;
+) : MediatR.IRequest<Result<QuizResponse>>;

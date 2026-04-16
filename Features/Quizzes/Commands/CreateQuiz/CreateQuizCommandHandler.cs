@@ -1,11 +1,8 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.Entities;
-using ExaminationSystem.Domain.Interfaces.Repositories;
-using ExaminationSystem.Errors;
-using ExaminationSystem.Features.Quizzes.Common;
+using ExaminationSystem.Domain.DTOs.QuizResponse;
+using ExaminationSystem.Domain.Entities; 
 using ExaminationSystem.Infrastructure.Persistence;
 using Mapster;
-using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +29,13 @@ namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
                 return Result.Failure<QuizResponse>(new Error("Diploma.NotFound", "الـ Diploma دي مش موجودة عندنا", null));
             }
 
+
+
             var quiz = request.Adapt<Quiz>();
+
+            _context.Quizzes.Add(quiz);
+
+            await _context.SaveChangesAsync(cancellationToken);
 
             var response = quiz.Adapt<QuizResponse>();
 

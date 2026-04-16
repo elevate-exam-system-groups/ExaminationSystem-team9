@@ -15,7 +15,7 @@ namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
 
             RuleFor(x=> x.DurationMinutes).GreaterThan(0);
 
-            RuleFor(x => x.PassScore).InclusiveBetween(0, 100).WithMessage("default:60");
+            RuleFor(x => x.PassScore).InclusiveBetween(0, 100);
 
             RuleFor(x => x.MaxAttempts).GreaterThan(0).When(x => x.MaxAttempts.HasValue);
 
