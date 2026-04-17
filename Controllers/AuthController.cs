@@ -3,7 +3,7 @@ using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ExaminationSystem.Controllers.Authentication;
+namespace ExaminationSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

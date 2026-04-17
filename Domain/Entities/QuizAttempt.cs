@@ -13,7 +13,7 @@ public class QuizAttempt : BaseEntity
     public DateTime Deadline { get; set; }
     public DateTime? SubmittedAt { get; set; }
     public decimal? Score { get; set; }
-    public bool? Passed { get; set; }
+    public bool? Passed { get; set; } 
 
     public ApplicationUser Student { get; set; } = default!; 
     public Quiz Quiz { get; set; } = default!;
