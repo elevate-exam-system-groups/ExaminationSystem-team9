@@ -1,10 +1,10 @@
 ﻿using ExaminationSystem.Features.Quizzes.Commands.CreateQuiz;
-using ExaminationSystem.Features.Quizzes.Common;
 using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Enums;
 using Mapster;
+using ExaminationSystem.Domain.DTOs.QuizResponse;
 namespace ExaminationSystem.Mapping;
 
 public class MappingConfigurations : IRegister

@@ -1,13 +1,15 @@
 ﻿using ExaminationSystem.Abstractions;   
 using ExaminationSystem.Domain.DTOs.QuizResponse;
+using MediatR;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz;
 
-public record CreateQuizCommand(
-    Guid DiplomaId,
-    string Title,
-    string? Instructions,
-    int DurationMinutes,
-    double PassScore,
-    int? MaxAttempts
-) : MediatR.IRequest<Result<QuizResponse>>;
+public record CreateQuizCommand : IRequest<Result<QuizResponse>>
+{
+    public Guid DiplomaId { get; init; }
+    public string Title { get; init; } = default!;
+    public string Instructions { get; init; } = default!;
+    public int DurationMinutes { get; init; }
+    public double PassScore { get; init; }
+    public int? MaxAttempts { get; init; }
+} 

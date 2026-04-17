@@ -1,6 +1,8 @@
 ﻿using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.DTOs.QuizResponse;
-using ExaminationSystem.Domain.Entities; 
+using ExaminationSystem.Domain.Entities;
+using ExaminationSystem.Domain.Enums;
+using ExaminationSystem.Domain.Interfaces.Repositories;
 using ExaminationSystem.Infrastructure.Persistence;
 using Mapster;
 using MediatR;
@@ -8,39 +10,55 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
 {
-    
+
+    // Location: Application/Features/Quizzes/Commands/CreateQuiz/CreateQuizCommandHandler.cs
     public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, Result<QuizResponse>>
     {
+        private readonly IGenericRepository<Quiz> _quizRepository;
 
-        private readonly ApplicationDbContext _context;
-
-        public CreateQuizCommandHandler(ApplicationDbContext context)
+        public CreateQuizCommandHandler(IGenericRepository<Quiz> quizRepository)
         {
-            
-            _context = context;
-
+            _quizRepository = quizRepository;
         }
+
         public async Task<Result<QuizResponse>> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
-            var diplomaExtist= await _context.Diplomas.AnyAsync(d => d.Id == request.DiplomaId, cancellationToken);
-
-            if (!diplomaExtist)
+            // 1. Map Command to Entity (يدوي أو بـ Mapster)
+            var quiz = new Quiz
             {
-                return Result.Failure<QuizResponse>(new Error("Diploma.NotFound", "الـ Diploma دي مش موجودة عندنا", null));
-            }
+                Id = Guid.NewGuid(),
+                DiplomaId = request.DiplomaId,
+                Title = request.Title,
+                Instructions = request.Instructions,
+                DurationMinutes = request.DurationMinutes,
+                PassScore = request.PassScore,
+                MaxAttempts = request.MaxAttempts,
+                Status = DiplomaStatus.Draft, // القيمة الافتراضية
+                CreatedAt = DateTime.UtcNow
+            };
 
+            // 2. Save
+            await _quizRepository.AddAsync(quiz, cancellationToken);
+            var result = await _quizRepository.SaveChangesAsync(cancellationToken);
 
+            if (result <= 0)
+                return (Result<QuizResponse>)Result<QuizResponse>.Failure(new Error("Quiz.SaveError", "Failed to save quiz."  ,null));
 
-            var quiz = request.Adapt<Quiz>();
-
-            _context.Quizzes.Add(quiz);
-
-            await _context.SaveChangesAsync(cancellationToken);
-
-            var response = quiz.Adapt<QuizResponse>();
+            // 3. Map Entity to Response
+            var response = new QuizResponse
+            {
+                QuizId = quiz.Id,
+                DiplomaId = quiz.DiplomaId,
+                Title = quiz.Title,
+                DurationMinutes = quiz.DurationMinutes,
+                PassScore = quiz.PassScore,
+                MaxAttempts = quiz.MaxAttempts,
+                Status = quiz.Status.ToString(),
+                QuestionCount = 0,
+                CreatedAt = quiz.CreatedAt
+            };
 
             return Result<QuizResponse>.Success(response);
-
         }
     }
 }

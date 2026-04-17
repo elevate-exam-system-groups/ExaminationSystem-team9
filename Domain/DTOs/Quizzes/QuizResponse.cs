@@ -1,16 +1,17 @@
 ﻿namespace ExaminationSystem.Domain.DTOs.QuizResponse
 {
-    public record QuizResponse(
-   Guid QuizId,
-   Guid DiplomaId,
-   string Title,
-   int DurationMinutes,
-   double PassScore,
-   int? MaxAttempts,
-   string? Instructions,
-   string Status,
-   int QuestionCount,
-   DateTime CreatedAt
-);
+// Location: Domain/DTOs/Quizzes/QuizResponse.cs
+public record QuizResponse
+{
+    public Guid QuizId { get; init; }
+    public Guid DiplomaId { get; init; }
+    public string Title { get; init; } = default!;
+    public int DurationMinutes { get; init; }
+    public double PassScore { get; init; }
+    public int? MaxAttempts { get; init; }
+    public string Status { get; init; } = default!;
+    public int QuestionCount { get; init; }
+    public DateTime CreatedAt { get; init; }
+}
 }
 
