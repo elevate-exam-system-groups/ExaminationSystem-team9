@@ -22,8 +22,9 @@ public class OverallStatsQueryHandler(IGenericRepository<QuizAttempt> quizAttemp
             .Select(g => new OverallStatsResponse(
                 g.Count(),
                 g.Average(c => c.Score),
-                g.Count(c => c.Passed == true) / g.Count() * 100.0,
+                (double)g.Count(c => c.Passed == true) / g.Count() * 100.0,
                 g.Sum(x => EF.Functions.DateDiffMinute(x.StartTime, x.SubmittedAt!.Value))
                 ))
-            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken)
+        ?? new OverallStatsResponse(0, 0, 0.0, 0);
 }

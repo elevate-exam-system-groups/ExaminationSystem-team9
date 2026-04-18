@@ -1,7 +1,7 @@
 ﻿using ExaminationSystem.Domain.DTOs.Student;
 using ExaminationSystem.Domain.Entities;
+using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +17,14 @@ public class RecentAttemptQueryHandler(IGenericRepository<QuizAttempt> quizAttem
         =>
         await _quizAttemptRepository
             .GetQueryable()
-            .Where(c => c.StudentId == request.UserId)
-            .OrderByDescending(c => c.CreatedAt)
-            .ProjectToType<RecentAttemptResponse>()
+            .Where(c => c.StudentId == request.UserId && c.Status == QuizAttemptStatus.Submitted)
+            .OrderByDescending(c => c.SubmittedAt)
+            .Select(c => new RecentAttemptResponse(
+                c.Id,
+                c.Quiz.Title,
+                c.Score,
+                c.Passed,
+                c.SubmittedAt!.Value
+                ))
             .ToListAsync(cancellationToken: cancellationToken);
 }

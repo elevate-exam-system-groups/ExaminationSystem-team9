@@ -1,5 +1,4 @@
 ﻿using ExaminationSystem.Domain.DTOs.Authentication;
-using ExaminationSystem.Domain.DTOs.Student;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Enums;
@@ -25,12 +24,6 @@ public class MappingConfigurations : IRegister
         config.NewConfig<Quiz, QuizResponse>()
             .Map(dest => dest.QuizId, src => src.Id)
             .Map(dest => dest.QuestionCount, src => src.Questions.Count);
-
-        //student dashboard
-        config.NewConfig<Enrollment, EnrolledDiplomaResponse>()
-            .Map(dest => dest.DiplomaTitle, src => src.Diploma.Title)
-            .Map(dest => dest.QuizCount, src => src.Diploma.Quizzes.Count())
-            .Map(dest => dest.CompletedQuizzes, src => src.Diploma.Quizzes.Count());
 
     }
 }
