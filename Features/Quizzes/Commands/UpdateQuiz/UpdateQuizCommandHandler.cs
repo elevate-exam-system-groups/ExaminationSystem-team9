@@ -1,40 +1,37 @@
-﻿using ExaminationSystem.Abstractions;
+using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Interfaces.Repositories;
-using ExaminationSystem.Infrastructure.Implementations.Repositories;
 using MediatR;
-using Org.BouncyCastle.Security;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.UpdateQuiz
 {
-    public class UpdateQuizCommandHandler : IRequestHandler<UpdateQuizCommand, Result>
+    public class UpdateQuizCommandHandler : IRequestHandler<UpdateQuizCommand, Result<Guid>>
     {
         private readonly IGenericRepository<Quiz> _repository;
+
         public UpdateQuizCommandHandler(IGenericRepository<Quiz> genericRepository)
         {
             _repository = genericRepository;
         }
 
-        public async Task<Result> Handle(UpdateQuizCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(UpdateQuizCommand request, CancellationToken cancellationToken)
         {
-            // data validation
-            var quiz = await _repository.GetByIdAsync(request.Id);
+            var quiz = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-                if (quiz == null)
-                    return Result.Failure<Guid>(new Error("no found","not found",null));
-                    
-            // edit and update
+            if (quiz == null)
+                return Result.Failure<Guid>(new Error("Quiz.NotFound", "Quiz not found.", 404));
+
             quiz.Title = request.Title;
             quiz.Instructions = request.Instructions;
             quiz.DurationMinutes = request.DurationMinutes;
             quiz.PassScore = request.PassScore;
             quiz.MaxAttempts = request.MaxAttempts;
+            quiz.UpdatedAt = DateTime.UtcNow;
 
             _repository.Update(quiz);
-            await _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync(cancellationToken);
 
             return Result.Success(quiz.Id);
-
         }
     }
 }
