@@ -27,8 +27,9 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 
-        services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
         services.Configure<IdentityOptions>(options =>
             {
@@ -38,6 +39,7 @@ public static class DependencyInjection
             });
 
         services
+            .AddAuthenticationConfig()
             .AddFluentValidationConfig()
             .AddMapsterConfig();
 
@@ -66,6 +68,22 @@ public static class DependencyInjection
     {
         services.AddFluentValidationAutoValidation()
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        return services;
+    }
+    private static IServiceCollection AddAuthenticationConfig(this IServiceCollection services)
+    {
+        services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                };
+            });
 
         return services;
     }

@@ -11,7 +11,7 @@ public class Quiz : BaseEntity
     public int DurationMinutes { get; set; }
     public double PassScore { get; set; } = 60.00;
     public int? MaxAttempts { get; set; }
-    public DiplomaStatus Status { get; set; } = DiplomaStatus.Draft;
+    public QuizStatus Status { get; set; } = QuizStatus.Draft;
     public DateTime? PublishedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
 

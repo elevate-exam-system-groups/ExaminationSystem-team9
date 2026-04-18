@@ -25,7 +25,7 @@ public class PublishQuizCommandHandler(IGenericRepository<Quiz> quizRepository)
         if (quiz is null)
             return Result.Failure<PublishQuizResponse>(QuizError.NotFound(request.Id));
 
-        if (quiz.Status == DiplomaStatus.Published)
+        if (quiz.Status == QuizStatus.Published)
             return Result.Failure<PublishQuizResponse>(QuizError.AlreadyPublished(request.Id));
 
         if (quiz.Questions.Count == 0)
@@ -41,7 +41,7 @@ public class PublishQuizCommandHandler(IGenericRepository<Quiz> quizRepository)
                 return Result.Failure<PublishQuizResponse>(QuizError.QuestionMustHaveOneCorrectOption(question.Id));
         }
 
-        quiz.Status = DiplomaStatus.Published;
+        quiz.Status = QuizStatus.Published;
         quiz.PublishedAt = DateTime.UtcNow;
         quiz.UpdatedAt = DateTime.UtcNow;
 

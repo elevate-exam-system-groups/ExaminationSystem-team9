@@ -15,7 +15,7 @@ public class QuizAttempt : BaseEntity
     public decimal? Score { get; set; }
     public bool? Passed { get; set; }
 
-    public ApplicationUser Student { get; set; } = default!; 
+    public ApplicationUser Student { get; set; } = default!;
     public Quiz Quiz { get; set; } = default!;
     public ICollection<AttemptAnswer> AttemptAnswers { get; set; } = new List<AttemptAnswer>();
 }

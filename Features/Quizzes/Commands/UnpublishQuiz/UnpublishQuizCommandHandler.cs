@@ -24,7 +24,7 @@ public class UnpublishQuizCommandHandler(
         if (quiz is null)
             return Result.Failure<PublishQuizResponse>(QuizError.NotFound(request.Id));
 
-        if (quiz.Status == DiplomaStatus.Draft)
+        if (quiz.Status == QuizStatus.Draft)
             return Result.Failure<PublishQuizResponse>(QuizError.AlreadyDraft(request.Id));
 
         var hasInProgressAttempts = await _quizAttemptRepository
@@ -34,7 +34,7 @@ public class UnpublishQuizCommandHandler(
         if (hasInProgressAttempts)
             return Result.Failure<PublishQuizResponse>(QuizError.HasInProgressAttempts(request.Id));
 
-        quiz.Status = DiplomaStatus.Draft;
+        quiz.Status = QuizStatus.Draft;
         quiz.PublishedAt = null;
         quiz.UpdatedAt = DateTime.UtcNow;
 
