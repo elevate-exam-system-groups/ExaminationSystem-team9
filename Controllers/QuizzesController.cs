@@ -1,7 +1,9 @@
 using ExaminationSystem.Abstractions;
+using ExaminationSystem.Features.Quizzes.Commands.AddQuestionToQuiz;
 using ExaminationSystem.Features.Quizzes.Commands.CreateQuiz;
 using ExaminationSystem.Features.Quizzes.Commands.PublishQuiz;
 using ExaminationSystem.Features.Quizzes.Commands.UnpublishQuiz;
+using ExaminationSystem.Features.Quizzes.Commands.UpdateQuestion;
 using ExaminationSystem.Features.Quizzes.Commands.UpdateQuiz;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,20 @@ namespace ExaminationSystem.Controllers
                 : BadRequest(result);
         }
 
+        [HttpPost("admin/quizzes/{quizId}/questions")]
+        public async Task<IActionResult> AddQuestion(
+            [FromRoute] Guid quizId,
+            [FromBody] AddQuestionCommand command,
+            CancellationToken cancellationToken)
+        {
+            command = command with { QuizId = quizId };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return result.IsSuccess
+                ? StatusCode(StatusCodes.Status201Created, result.Value)
+                : result.ToProblem();
+        }
+
         [HttpPut("admin/quizzes/{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateQuizCommand command)
         {
@@ -36,6 +52,20 @@ namespace ExaminationSystem.Controllers
             var result = await _mediator.Send(command);
             return result.IsSuccess
                 ? NoContent()
+                : result.ToProblem();
+        }
+
+        [HttpPut("admin/questions/{questionId}")]
+        public async Task<IActionResult> UpdateQuestion(
+            [FromRoute] Guid questionId,
+            [FromBody] UpdateQuestionCommand command,
+            CancellationToken cancellationToken)
+        {
+            command = command with { QuestionId = questionId };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return result.IsSuccess
+                ? Ok(result.Value)
                 : result.ToProblem();
         }
 
