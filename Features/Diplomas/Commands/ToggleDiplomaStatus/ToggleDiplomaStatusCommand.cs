@@ -24,7 +24,6 @@ public class ToggleDiplomaStatusCommandHandler(IGenericRepository<Diploma> diplo
 
         if (affectedRows == 0)
             return Result.Failure(DiplomaError.NotFound(request.Id));
-        //await _diplomaRepository.SaveChangesAsync(cancellationToken);
 
         return Result.Success();
     }

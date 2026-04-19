@@ -28,8 +28,8 @@ public class ToggleDeleteStatusCommandHandler(IGenericRepository<Diploma> diplom
             .GetQueryable()
             .Where(c => c.Id == request.Id)
             .ExecuteUpdateAsync(s => s
-            .SetProperty(d => d.IsDeleted, true)
-            .SetProperty(d => d.DeletedAt, DateTime.UtcNow),
+            .SetProperty(d => d.IsDeleted, x => !x.IsDeleted)
+            .SetProperty(d => d.DeletedAt, x => x.IsDeleted ? DateTime.UtcNow : null),
             cancellationToken);
 
         if (affectedRows == 0)

@@ -1,13 +1,12 @@
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Entities.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Infrastructure.Persistence;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
+    : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>(options)
 {
     public DbSet<OtpCode> OtpCodes { get; set; }
     public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }

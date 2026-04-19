@@ -3,10 +3,7 @@ using ExaminationSystem.Domain.DTOs.QuizResponse;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
-using ExaminationSystem.Infrastructure.Persistence;
-using Mapster;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
 {
@@ -33,7 +30,7 @@ namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
                 DurationMinutes = request.DurationMinutes,
                 PassScore = request.PassScore,
                 MaxAttempts = request.MaxAttempts,
-                Status = DiplomaStatus.Draft, // القيمة الافتراضية
+                Status = QuizStatus.Draft, // القيمة الافتراضية
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -42,7 +39,7 @@ namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz
             var result = await _quizRepository.SaveChangesAsync(cancellationToken);
 
             if (result <= 0)
-                return (Result<QuizResponse>)Result<QuizResponse>.Failure(new Error("Quiz.SaveError", "Failed to save quiz."  ,null));
+                return (Result<QuizResponse>)Result<QuizResponse>.Failure(new Error("Quiz.SaveError", "Failed to save quiz.", null));
 
             // 3. Map Entity to Response
             var response = new QuizResponse

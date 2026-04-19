@@ -13,5 +13,5 @@ public class ApplicationUser : IdentityUser<Guid>
 
     public ICollection<Enrollment> Enrollments { get; set; } = [];
     public ICollection<QuizAttempt> QuizAttempts { get; set; } = [];
-    public ICollection<OtpCode> otpCodes { get; set; } = [];
+    public ICollection<OtpCode> OtpCodes { get; set; } = [];
 }

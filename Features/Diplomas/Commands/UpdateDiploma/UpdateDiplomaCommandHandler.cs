@@ -3,6 +3,7 @@ using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Interfaces.Repositories;
 using ExaminationSystem.Errors;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Features.Diplomas.Commands.UpdateDiploma;
 
@@ -12,16 +13,17 @@ public class UpdateDiplomaCommandHandler(IGenericRepository<Diploma> diplomaRepo
 
     public async Task<Result> Handle(UpdateDiplomaCommand request, CancellationToken cancellationToken)
     {
-        var diploma = await _diplomaRepository.GetByIdAsync(request.Id, cancellationToken);
+        var affectedRow = await _diplomaRepository
+            .GetQueryable()
+            .Where(c => c.Id == request.Id)
+            .ExecuteUpdateAsync(s => s
+            .SetProperty(d => d.Title, request.Title)
+            .SetProperty(d => d.Description, request.Description)
+            .SetProperty(d => d.UpdatedAt, DateTime.UtcNow),
+            cancellationToken);
 
-        if (diploma is null)
+        if (affectedRow == 0)
             return Result.Failure(DiplomaError.NotFound(request.Id));
-
-        diploma.Title = request.Title;
-        diploma.Description = request.Description;
-        diploma.UpdatedAt = DateTime.UtcNow;
-
-        await _diplomaRepository.SaveChangesAsync(cancellationToken);
 
         return Result.Success();
     }
