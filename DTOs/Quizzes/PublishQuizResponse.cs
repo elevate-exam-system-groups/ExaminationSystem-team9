@@ -1,4 +1,4 @@
-namespace ExaminationSystem.Domain.DTOs.Quizzes;
+namespace ExaminationSystem.DTOs.Quizzes;
 
 public record PublishQuizResponse
 {

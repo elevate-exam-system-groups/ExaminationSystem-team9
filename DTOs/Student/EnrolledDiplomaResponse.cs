@@ -1,4 +1,4 @@
-﻿namespace ExaminationSystem.Domain.DTOs.Student;
+﻿namespace ExaminationSystem.DTOs.Student;
 
 public record EnrolledDiplomaResponse(int Id,
     string DiplomaTitle,

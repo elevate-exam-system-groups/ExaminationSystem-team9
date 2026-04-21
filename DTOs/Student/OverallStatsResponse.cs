@@ -1,4 +1,4 @@
-﻿namespace ExaminationSystem.Domain.DTOs.Student;
+﻿namespace ExaminationSystem.DTOs.Student;
 
 public record OverallStatsResponse(
     int TotalQuizzes,

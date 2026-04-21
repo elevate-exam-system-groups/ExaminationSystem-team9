@@ -1,8 +1,5 @@
 ﻿using ExaminationSystem.Abstractions.Constants;
-using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Enums;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ExaminationSystem.Infrastructure.Persistence.EntitiesConfigurations;

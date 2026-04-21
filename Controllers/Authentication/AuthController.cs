@@ -1,6 +1,4 @@
-using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Authentication;
-using ExaminationSystem.Domain.Interfaces.Authentication;
+using ExaminationSystem.DTOs.Authentication;
 using ExaminationSystem.Features.Authentication.Commands.ForgotPassword;
 using ExaminationSystem.Features.Authentication.Commands.ResetPassword;
 using MediatR;
@@ -18,6 +16,13 @@ public class AuthController(IAuthService _authService, IMediator _mediator) : Co
     public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
     {
         var result = await _authService.RegisterAsync(request, cancellationToken);
+
+        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+    }
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest request, CancellationToken cancellationToken)
+    {
+        var result = await _authService.GetTokenAsync(request.Email, request.Password, cancellationToken);
 
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }

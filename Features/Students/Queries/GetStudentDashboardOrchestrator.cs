@@ -1,5 +1,5 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Student;
+using ExaminationSystem.DTOs.Student;
 using ExaminationSystem.Errors.Authentication;
 using MediatR;
 
@@ -16,7 +16,7 @@ public class StudentDashboardResponseHandler(IMediator mediator) : IRequestHandl
         var student = await _mediator.Send(new GetStudentQuery(request.UserId), cancellationToken);
 
         if (student is null)
-            return Result.Failure<StudentDashboardResponse>(UserError.NotFound(request.UserId));
+            return Result.Failure<StudentDashboardResponse>(UserErrors.NotFound(request.UserId));
 
         var enrolledDiplomas = await _mediator.Send(new EnrolledDiplomasQuery(request.UserId), cancellationToken);
 

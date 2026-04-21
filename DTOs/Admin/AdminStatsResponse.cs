@@ -1,4 +1,4 @@
-﻿namespace ExaminationSystem.Domain.DTOs.Admin;
+﻿namespace ExaminationSystem.DTOs.Admin;
 
 public record AdminStatsResponse(
     int TotalUsers,

@@ -1,7 +1,7 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Diplomas;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Interfaces.Repositories;
+using ExaminationSystem.DTOs.Diplomas;
 using ExaminationSystem.Errors;
 using Mapster;
 using MediatR;

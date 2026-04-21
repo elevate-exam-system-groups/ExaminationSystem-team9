@@ -1,10 +1,8 @@
 ﻿global using ExaminationSystem.Abstractions;
-global using ExaminationSystem.Domain.DTOs.Authentication;
 global using ExaminationSystem.Domain.Entities.Authentication;
 global using ExaminationSystem.Domain.Interfaces.Authentication;
 global using ExaminationSystem.Domain.Interfaces.Repositories;
 global using ExaminationSystem.Errors.Authentication;
-global using ExaminationSystem.Infrastructure.Implementations;
 global using ExaminationSystem.Infrastructure.Implementations.Authentication;
 global using ExaminationSystem.Infrastructure.Implementations.Repositories;
 global using ExaminationSystem.Infrastructure.Persistence;

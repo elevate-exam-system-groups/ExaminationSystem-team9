@@ -25,7 +25,7 @@ public class ResetPasswordCommandHandler(
             .FirstOrDefaultAsync(t => t.TokenHash == tokenHash && !t.IsUsed && t.ExpiresAt > DateTime.Now,cancellationToken);
 
         if (resetToken is null)
-            return Result.Failure(UserError.InvalidOrExpiredResetToken);
+            return Result.Failure(UserErrors.InvalidOrExpiredResetToken);
 
         var user = resetToken.User;
 

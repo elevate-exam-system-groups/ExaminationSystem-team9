@@ -1,4 +1,4 @@
-﻿namespace ExaminationSystem.Domain.DTOs.Common;
+﻿namespace ExaminationSystem.DTOs.Common;
 
 public record RequestFilters
 {

@@ -1,5 +1,4 @@
 ﻿using ExaminationSystem.Domain.Enums;
-using Microsoft.AspNetCore.Identity;
 
 namespace ExaminationSystem.Domain.Entities.Authentication;
 
@@ -15,4 +14,5 @@ public class ApplicationUser : IdentityUser<Guid>
     public ICollection<Enrollment> Enrollments { get; set; } = [];
     public ICollection<QuizAttempt> QuizAttempts { get; set; } = [];
     public ICollection<OtpCode> OtpCodes { get; set; } = [];
+    public IList<RefreshToken> RefreshTokens { get; set; } = [];
 }

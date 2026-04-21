@@ -1,8 +1,8 @@
 using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Quizzes;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
+using ExaminationSystem.DTOs.Quizzes;
 using ExaminationSystem.Errors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
