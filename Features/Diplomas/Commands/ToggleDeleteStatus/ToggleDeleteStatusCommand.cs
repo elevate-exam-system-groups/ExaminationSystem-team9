@@ -26,6 +26,7 @@ public class ToggleDeleteStatusCommandHandler(IGenericRepository<Diploma> diplom
 
         var affectedRows = await _diplomaRepository
             .GetQueryable()
+            .IgnoreQueryFilters()
             .Where(c => c.Id == request.Id)
             .ExecuteUpdateAsync(s => s
             .SetProperty(d => d.IsDeleted, x => !x.IsDeleted)

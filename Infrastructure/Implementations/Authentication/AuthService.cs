@@ -1,5 +1,4 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Abstractions.Constants;
 using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
@@ -30,7 +29,6 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
         var user = Request.Adapt<ApplicationUser>();
 
         var result = await _userManager.CreateAsync(user, Request.Password);
-        await _userManager.AddToRoleAsync(user, DefaultRoles.Student);
 
         if (!result.Succeeded)
         {
@@ -44,6 +42,8 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
         var body = $"Use this Otp to Confirm your email. otp is =>  {code} 'it will Expires After 10 Minutes' ";
 
         await _emailSender.SendEmailAsync(user.Email!, "Confirmation Your Email", body);
+
+        //await _userManager.AddToRoleAsync(user, DefaultRoles.Student);    // move After login And confirm email
 
         var otpCode = new OtpCode
         {

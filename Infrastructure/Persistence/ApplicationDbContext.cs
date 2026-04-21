@@ -21,6 +21,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<ApplicationUser>().HasQueryFilter(e => !e.IsDeleted);
+        builder.Entity<ApplicationRole>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<Diploma>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<Enrollment>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<Quiz>().HasQueryFilter(e => !e.IsDeleted);

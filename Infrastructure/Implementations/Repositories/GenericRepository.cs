@@ -9,16 +9,16 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
 {
     private readonly ApplicationDbContext _context = context;
 
-    public IQueryable<T> GetQueryable() => _context.Set<T>().AsNoTracking();
+    public IQueryable<T> GetQueryable() => _context.Set<T>();
     public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default) =>
-        await _context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
+        await _context.Set<T>().ToListAsync(cancellationToken);
     public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken = default) =>
         await _context.Set<T>().FindAsync(id, cancellationToken);
     public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
         await _context.Set<T>().FindAsync(id, cancellationToken);
 
     public async Task<T?> GetByPredicateAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default) =>
-        await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate, cancellationToken);
+        await _context.Set<T>().FirstOrDefaultAsync(predicate, cancellationToken);
 
     public async Task AddAsync(T entity, CancellationToken cancellationToken = default) =>
         await _context.Set<T>().AddAsync(entity, cancellationToken);

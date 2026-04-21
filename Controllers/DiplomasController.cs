@@ -60,7 +60,7 @@ namespace ExaminationSystem.Controllers
             return result.IsSuccess ? NoContent() : result.ToProblem();
         }
 
-        [HttpDelete("admin/diploma/soft-delete/{id}")]
+        [HttpPut("admin/diploma/soft-delete/{id}")]
         public async Task<IActionResult> SoftDelete([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new ToggleDeleteStatusCommand(id), cancellationToken);

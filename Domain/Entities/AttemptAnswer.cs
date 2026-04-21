@@ -3,7 +3,7 @@
 public class AttemptAnswer : BaseEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid QuizAttemptId { get; set; }  
+    public Guid QuizAttemptId { get; set; }
     public Guid QuestionId { get; set; }
     public Guid? SelectedOptionId { get; set; }
     public bool? IsCorrect { get; set; }
