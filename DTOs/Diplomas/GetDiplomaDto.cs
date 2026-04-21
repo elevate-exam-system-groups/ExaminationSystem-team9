@@ -1,6 +1,6 @@
 ﻿using ExaminationSystem.Domain.Enums;
 
-namespace ExaminationSystem.Domain.DTOs.Diplomas;
+namespace ExaminationSystem.DTOs.Diplomas;
 
 public record GetDiplomaDto(
     Guid Id,

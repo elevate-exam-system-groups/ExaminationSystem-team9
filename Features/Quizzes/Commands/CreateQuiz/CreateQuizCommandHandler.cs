@@ -1,8 +1,8 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.QuizResponse;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
+using ExaminationSystem.DTOs.Quizzes;
 using MediatR;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.CreateQuiz

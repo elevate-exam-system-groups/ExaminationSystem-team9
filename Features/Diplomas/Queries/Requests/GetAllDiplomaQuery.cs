@@ -1,9 +1,9 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Common;
-using ExaminationSystem.Domain.DTOs.Diplomas;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
+using ExaminationSystem.DTOs.Common;
+using ExaminationSystem.DTOs.Diplomas;
 using Mapster;
 using MediatR;
 

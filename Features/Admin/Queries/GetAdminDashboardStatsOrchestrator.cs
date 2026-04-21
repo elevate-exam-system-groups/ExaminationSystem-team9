@@ -1,5 +1,5 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Admin;
+using ExaminationSystem.DTOs.Admin;
 using ExaminationSystem.Features.Diplomas.Queries.Requests;
 using ExaminationSystem.Features.Quizzes.Queries;
 using MediatR;

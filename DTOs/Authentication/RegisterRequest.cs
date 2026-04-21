@@ -1,7 +1,7 @@
 ﻿using ExaminationSystem.Abstractions.Constants;
 using FluentValidation;
 
-namespace ExaminationSystem.Domain.DTOs.Authentication;
+namespace ExaminationSystem.DTOs.Authentication;
 
 public record RegisterRequest(
     string Email,

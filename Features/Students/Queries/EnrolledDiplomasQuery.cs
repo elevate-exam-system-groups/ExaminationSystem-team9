@@ -1,7 +1,7 @@
-﻿using ExaminationSystem.Domain.DTOs.Student;
-using ExaminationSystem.Domain.Entities;
+﻿using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Enums;
 using ExaminationSystem.Domain.Interfaces.Repositories;
+using ExaminationSystem.DTOs.Student;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

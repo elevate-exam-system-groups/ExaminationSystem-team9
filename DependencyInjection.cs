@@ -1,4 +1,9 @@
-﻿namespace ExaminationSystem;
+﻿using ExaminationSystem.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+namespace ExaminationSystem;
 
 public static class DependencyInjection
 {
@@ -17,15 +22,8 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequiredLength = 8;
-                options.SignIn.RequireConfirmedEmail = true;
-                options.User.RequireUniqueEmail = true;
-            });
-
         services
-            .AddAuthenticationConfig()
+            .AddAuthenticationConfig(configuration)
             .AddFluentValidationConfig()
             .AddMapsterConfig();
 
@@ -57,19 +55,44 @@ public static class DependencyInjection
 
         return services;
     }
-    private static IServiceCollection AddAuthenticationConfig(this IServiceCollection services)
+    private static IServiceCollection AddAuthenticationConfig(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAuthentication("Bearer")
-            .AddJwtBearer("Bearer", options =>
+        services.AddSingleton<IJwtProvider, JwtProvider>();
+
+        //services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+        services.AddOptions<JwtOptions>()
+                .BindConfiguration(JwtOptions.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+        var jwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(o =>
+        {
+            o.SaveToken = true;
+            o.TokenValidationParameters = new TokenValidationParameters
             {
-                options.TokenValidationParameters = new()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                };
-            });
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings!.Key)),
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+            };
+        });
+
+        services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequiredLength = 8;
+            options.SignIn.RequireConfirmedEmail = true;
+            options.User.RequireUniqueEmail = true;
+        });
 
         return services;
     }

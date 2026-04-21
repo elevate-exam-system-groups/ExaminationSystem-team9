@@ -1,5 +1,5 @@
 using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Quizzes;
+using ExaminationSystem.DTOs.Quizzes;
 using MediatR;
 
 namespace ExaminationSystem.Features.Quizzes.Commands.PublishQuiz;

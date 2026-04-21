@@ -1,4 +1,4 @@
-namespace ExaminationSystem.Domain.DTOs.Questions;
+namespace ExaminationSystem.DTOs.Questions;
 
 public record AddQuestionResponse
 {

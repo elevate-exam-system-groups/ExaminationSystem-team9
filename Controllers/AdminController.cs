@@ -1,12 +1,14 @@
-﻿using ExaminationSystem.Features.Admin.Queries;
+﻿using ExaminationSystem.Abstractions.Constants;
+using ExaminationSystem.Features.Admin.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExaminationSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize(Roles =DefaultRoles.Admin)]
+[Authorize(Roles = DefaultRoles.Admin)]
 public class AdminController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;

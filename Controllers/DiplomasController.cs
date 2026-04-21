@@ -1,5 +1,5 @@
 ﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Common;
+using ExaminationSystem.DTOs.Common;
 using ExaminationSystem.Features.Diplomas.Commands.CreateDiploma;
 using ExaminationSystem.Features.Diplomas.Commands.ToggleDeleteStatus;
 using ExaminationSystem.Features.Diplomas.Commands.ToggleDiplomaStatus;

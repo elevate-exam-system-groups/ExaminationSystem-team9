@@ -1,5 +1,5 @@
-﻿using ExaminationSystem.Domain.DTOs.Student;
-using ExaminationSystem.Domain.Entities.Authentication;
+﻿using ExaminationSystem.Domain.Entities.Authentication;
+using ExaminationSystem.DTOs.Student;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

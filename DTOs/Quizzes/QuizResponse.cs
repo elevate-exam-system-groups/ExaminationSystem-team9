@@ -1,4 +1,4 @@
-﻿namespace ExaminationSystem.Domain.DTOs.QuizResponse
+﻿namespace ExaminationSystem.DTOs.Quizzes
 {
 // Location: Domain/DTOs/Quizzes/QuizResponse.cs
 public record QuizResponse

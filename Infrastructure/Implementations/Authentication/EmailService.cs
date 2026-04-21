@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace ExaminationSystem.Infrastructure.Implementations;
+namespace ExaminationSystem.Infrastructure.Implementations.Authentication;
 
 public class EmailService(IOptions<MailSettings> mailSettings) : IEmailSender
 {

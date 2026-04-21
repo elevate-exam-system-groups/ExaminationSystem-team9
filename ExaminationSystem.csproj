@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\DTOs\Questions\" />
     <Folder Include="Features\QuizAttempts\Queries\" />
     <Folder Include="Features\Quizzes\Common\" />
   </ItemGroup>
