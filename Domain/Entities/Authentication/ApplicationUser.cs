@@ -9,6 +9,7 @@ public class ApplicationUser : IdentityUser<Guid>
     public AccountStatus AccountStatus { get; set; } = AccountStatus.Pending;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
+    public DateTime? LastLoginAt { get; set; }
     public bool IsDeleted { get; set; }
 
     public ICollection<Enrollment> Enrollments { get; set; } = [];

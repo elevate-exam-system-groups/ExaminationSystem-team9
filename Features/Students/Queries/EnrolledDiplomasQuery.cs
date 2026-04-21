@@ -15,27 +15,6 @@ public class EnrolledDiplomasQueryHandler(IGenericRepository<Enrollment> Enrollm
 
     public async Task<List<EnrolledDiplomaResponse>> Handle(EnrolledDiplomasQuery request, CancellationToken cancellationToken)
     {
-        //await _enrollmentRepository
-        //       .GetQueryable()
-        //       .Where(c => c.StudentId == request.UserId)
-        //       .Select(c => new
-        //       {
-        //           c.Id,
-        //           DiplomaTitle = c.Diploma.Title,
-        //           QuizCount = c.Diploma.Quizzes.Count(x => x.Status == QuizStatus.Published),
-        //           CompletedQuizzes = c.Diploma.Quizzes
-        //               .Count(q => q.Status == QuizStatus.Published
-        //                        && q.QuizAttempts.Any(a =>
-        //                               a.StudentId == request.UserId &&
-        //                               a.Status == QuizAttemptStatus.Submitted)),
-
-        //           LastActivityAt = c.Diploma.Quizzes
-        //               .SelectMany(q => q.QuizAttempts)
-        //               .Where(a => a.StudentId == request.UserId && a.SubmittedAt != null)
-        //               .Max(a => (DateTime?)a.SubmittedAt)
-        //       })
-        //   .ToListAsync(cancellationToken);
-
         var raw = await _enrollmentRepository
        .GetQueryable()
        .Where(c => c.StudentId == request.UserId)

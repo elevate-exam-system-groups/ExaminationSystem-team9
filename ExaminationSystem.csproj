@@ -34,8 +34,8 @@
 
   <ItemGroup>
     <Folder Include="Domain\DTOs\Questions\" />
+    <Folder Include="Features\QuizAttempts\Queries\" />
     <Folder Include="Features\Quizzes\Common\" />
-    <Folder Include="Features\Quizzes\Queries\" />
   </ItemGroup>
 
 </Project>

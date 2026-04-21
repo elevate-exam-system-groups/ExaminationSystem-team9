@@ -4,6 +4,7 @@ using ExaminationSystem.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExaminationSystem.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260421084526_SeedingAdminData")]
+    partial class SeedingAdminData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,9 +155,6 @@ namespace ExaminationSystem.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastLoginAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -208,9 +208,9 @@ namespace ExaminationSystem.Infrastructure.Persistence.Migrations
                         {
                             Id = new Guid("84e9be3e-d03d-457c-aa82-32cd9a6cc17f"),
                             AccessFailedCount = 0,
-                            AccountStatus = 2,
+                            AccountStatus = 1,
                             ConcurrencyStamp = "EB8550F122F348CE921A3030029B27B7",
-                            CreatedAt = new DateTime(2026, 4, 21, 9, 50, 17, 987, DateTimeKind.Utc).AddTicks(9889),
+                            CreatedAt = new DateTime(2026, 4, 21, 8, 45, 24, 689, DateTimeKind.Utc).AddTicks(15),
                             Email = "admin@examination.com",
                             EmailConfirmed = true,
                             FullName = "Admin Exam",
@@ -218,7 +218,7 @@ namespace ExaminationSystem.Infrastructure.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMINATION.COM",
                             NormalizedUserName = "ADMIN@EXAMINATION.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOdwkvr7LaaYaMxQJ9r968d4p8dEgscwkSIzX/sGmsPZXoEaqa9ECmhn/uxEXhJYfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENoozm3PE1tKQfNEvqI7H9HsE5tBzuPLYBGqZySi+nnabLo1VIUP6MH7JjtElif1eQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "EB8550F122F348CE921A3030029B27B7",
                             TwoFactorEnabled = false,
