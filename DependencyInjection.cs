@@ -1,21 +1,4 @@
-﻿using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.Domain.Interfaces.Authentication;
-using ExaminationSystem.Domain.Interfaces.Repositories;
-using ExaminationSystem.Infrastructure.Implementations;
-using ExaminationSystem.Infrastructure.Implementations.Authentication;
-using ExaminationSystem.Infrastructure.Implementations.Repositories;
-using ExaminationSystem.Infrastructure.Persistence;
-using ExaminationSystem.Settings;
-using FluentValidation;
-using Mapster;
-using MapsterMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using System.Reflection;
-
-namespace ExaminationSystem;
+﻿namespace ExaminationSystem;
 
 public static class DependencyInjection
 {

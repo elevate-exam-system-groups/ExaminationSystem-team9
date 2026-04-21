@@ -1,15 +1,4 @@
-﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Domain.DTOs.Authentication;
-using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.Domain.Interfaces.Authentication;
-using ExaminationSystem.Errors.Authentication;
-using ExaminationSystem.Infrastructure.Persistence;
-using Mapster;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-
-namespace ExaminationSystem.Infrastructure.Implementations.Authentication;
+﻿namespace ExaminationSystem.Infrastructure.Implementations.Authentication;
 
 public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender emailSender,
     ApplicationDbContext context)
