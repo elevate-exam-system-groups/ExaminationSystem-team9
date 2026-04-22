@@ -22,7 +22,7 @@ public class ToggleDeleteStatusCommandHandler(IGenericRepository<Diploma> diplom
             .FirstOrDefaultAsync(cancellationToken);
 
         if (hasActiveEnrollments)
-            return Result.Failure(DiplomaError.HasActiveEnrollments);
+            return Result.Failure(DiplomaErrors.HasActiveEnrollments);
 
         var affectedRows = await _diplomaRepository
             .GetQueryable()
@@ -34,7 +34,7 @@ public class ToggleDeleteStatusCommandHandler(IGenericRepository<Diploma> diplom
             cancellationToken);
 
         if (affectedRows == 0)
-            return Result.Failure(DiplomaError.NotFound(request.Id));
+            return Result.Failure(DiplomaErrors.NotFound(request.Id));
 
         return Result.Success();
     }

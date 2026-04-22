@@ -24,7 +24,7 @@ public class GetDiplomaByIdQueryHandler(IGenericRepository<Diploma> DiplomaRepos
         .FirstOrDefaultAsync(cancellationToken);
 
         if (diploma is null)
-            return Result.Failure<GetDiplomaDto>(DiplomaError.NotFound(request.Id));
+            return Result.Failure<GetDiplomaDto>(DiplomaErrors.NotFound(request.Id));
 
         return Result.Success(diploma);
     }

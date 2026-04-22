@@ -1,9 +1,5 @@
-﻿using ExaminationSystem.Domain.Entities.Authentication;
-using ExaminationSystem.DTOs.Student;
-using Mapster;
+﻿using ExaminationSystem.DTOs.Student;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Features.Students.Queries;
 

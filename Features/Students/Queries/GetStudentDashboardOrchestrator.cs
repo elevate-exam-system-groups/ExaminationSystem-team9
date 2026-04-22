@@ -1,6 +1,4 @@
-﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.DTOs.Student;
-using ExaminationSystem.Errors.Authentication;
+﻿using ExaminationSystem.DTOs.Student;
 using MediatR;
 
 namespace ExaminationSystem.Features.Students.Queries;
@@ -26,6 +24,6 @@ public class StudentDashboardResponseHandler(IMediator mediator) : IRequestHandl
 
         var response = new StudentDashboardResponse(student, enrolledDiplomas, recentAttempt, overAllStats);
 
-        return Result.Success<StudentDashboardResponse>(response);
+        return Result.Success(response);
     }
 }

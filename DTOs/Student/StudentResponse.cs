@@ -1,6 +1,6 @@
 ﻿namespace ExaminationSystem.DTOs.Student;
 
-public record StudentResponse(string Id,
+public record StudentResponse(Guid Id,
     string FullName,
     string Email
     );

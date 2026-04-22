@@ -1,13 +1,14 @@
-﻿using ExaminationSystem.Abstractions;
-using ExaminationSystem.Features.Students.Queries;
+﻿using ExaminationSystem.Features.Students.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ExaminationSystem.Controllers;
 
 [Route("api/[controller]/dashboard")]
 [ApiController]
-//[Authorize(Roles = "Student")]
+[Authorize(Roles = "Student")]
 public class StudentController(IMediator mediator, IHttpContextAccessor httpContextAccessor) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
@@ -16,9 +17,9 @@ public class StudentController(IMediator mediator, IHttpContextAccessor httpCont
     [HttpGet("")]
     public async Task<IActionResult> GetDashboard(CancellationToken cancellationToken)
     {
-        //var userId = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var result = await _mediator.Send(new GetStudentDashboardOrchestrator(Guid.Parse("cbb9db8a-4370-4d03-ac3d-08de986e3eeb")), cancellationToken);
+        var result = await _mediator.Send(new GetStudentDashboardOrchestrator(Guid.Parse(userId!)), cancellationToken);
 
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }

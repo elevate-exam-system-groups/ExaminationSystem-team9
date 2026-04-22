@@ -1,5 +1,5 @@
-﻿namespace ExaminationSystem.DTOs.Quizzes
-{
+﻿namespace ExaminationSystem.DTOs.Quizzes;
+
 // Location: Domain/DTOs/Quizzes/QuizResponse.cs
 public record QuizResponse
 {
@@ -12,6 +12,5 @@ public record QuizResponse
     public string Status { get; init; } = default!;
     public int QuestionCount { get; init; }
     public DateTime CreatedAt { get; init; }
-}
 }
 
