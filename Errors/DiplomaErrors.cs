@@ -1,8 +1,6 @@
-﻿using ExaminationSystem.Abstractions;
+﻿namespace ExaminationSystem.Errors;
 
-namespace ExaminationSystem.Errors;
-
-public static class DiplomaError
+public static class DiplomaErrors
 {
     public static Error NotFound(Guid Id) =>
         new("Diploma.NotFound", $"Diploma with ID '{Id}' was not found", StatusCodes.Status404NotFound);

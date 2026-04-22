@@ -23,7 +23,7 @@ public class UpdateDiplomaCommandHandler(IGenericRepository<Diploma> diplomaRepo
             cancellationToken);
 
         if (affectedRow == 0)
-            return Result.Failure(DiplomaError.NotFound(request.Id));
+            return Result.Failure(DiplomaErrors.NotFound(request.Id));
 
         return Result.Success();
     }
