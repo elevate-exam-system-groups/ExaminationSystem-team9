@@ -1,4 +1,12 @@
-﻿namespace ExaminationSystem.Domain.Entities.Authentication;
+﻿/* File Overview
+ * File: OtpCode.cs
+ * Purpose: Domain model: core business entities and relationships used across the application.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+namespace ExaminationSystem.Domain.Entities.Authentication;
 
 public class OtpCode : BaseEntity
 {
@@ -13,3 +21,4 @@ public class OtpCode : BaseEntity
 
     public ApplicationUser User { get; set; } = default!;
 }
+

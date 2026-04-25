@@ -1,4 +1,12 @@
-﻿using System.Linq.Expressions;
+﻿/* File Overview
+ * File: IGenericRepository.cs
+ * Purpose: Domain abstractions: interfaces/contracts that decouple application logic from infrastructure details.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using System.Linq.Expressions;
 
 namespace ExaminationSystem.Domain.Interfaces.Repositories;
 
@@ -14,3 +22,4 @@ public interface IGenericRepository<T> where T : class
     void SoftDelete(T entity);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
+

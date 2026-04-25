@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Domain.Entities.Authentication;
+﻿/* File Overview
+ * File: Enrollment.cs
+ * Purpose: Domain model: core business entities and relationships used across the application.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Domain.Entities.Authentication;
 
 namespace ExaminationSystem.Domain.Entities;
 
@@ -11,3 +19,4 @@ public class Enrollment : BaseEntity
     public ApplicationUser Student { get; set; } = default!;
     public Diploma Diploma { get; set; } = default!;
 }
+

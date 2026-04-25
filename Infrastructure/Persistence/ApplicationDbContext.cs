@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Domain.Entities;
+﻿/* File Overview
+ * File: ApplicationDbContext.cs
+ * Purpose: Persistence layer: DbContext and data access integration using Entity Framework Core.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Entities.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -17,6 +25,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Option> Options { get; set; }
     public DbSet<QuizAttempt> QuizAttempts { get; set; }
     public DbSet<AttemptAnswer> AttemptAnswers { get; set; }
+    public DbSet<QuizAttemptResult> QuizAttemptResults { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,6 +37,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.Entity<Option>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<QuizAttempt>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<AttemptAnswer>().HasQueryFilter(e => !e.IsDeleted);
+        builder.Entity<QuizAttemptResult>().HasQueryFilter(e => !e.IsDeleted);
 
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
@@ -41,3 +51,4 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         base.OnModelCreating(builder);
     }
 }
+

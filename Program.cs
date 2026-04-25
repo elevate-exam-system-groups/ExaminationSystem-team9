@@ -1,3 +1,11 @@
+﻿/* File Overview
+ * File: Program.cs
+ * Purpose: Application bootstrap: configures ASP.NET Core pipeline and starts the web host.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
 
 namespace ExaminationSystem;
 
@@ -24,6 +32,7 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
 
@@ -32,3 +41,4 @@ public class Program
         app.Run();
     }
 }
+

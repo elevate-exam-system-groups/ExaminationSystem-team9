@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Abstractions;
+﻿/* File Overview
+ * File: AuthService.cs
+ * Purpose: Infrastructure services: concrete implementations for domain/application abstractions.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
@@ -63,3 +71,4 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
 
     private static string GenerateOtp() => Random.Shared.Next(100000, 999999).ToString();
 }
+

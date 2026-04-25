@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Abstractions;
+﻿/* File Overview
+ * File: GetDiplomaByIdQuery.cs
+ * Purpose: Application layer (CQRS): defines commands/queries and handlers that implement use-cases through MediatR.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.DTOs.Diplomas;
 using ExaminationSystem.Domain.Entities;
 using ExaminationSystem.Domain.Interfaces.Repositories;

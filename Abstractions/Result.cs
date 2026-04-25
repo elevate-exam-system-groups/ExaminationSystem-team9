@@ -1,4 +1,12 @@
-﻿namespace ExaminationSystem.Abstractions;
+﻿/* File Overview
+ * File: Result.cs
+ * Purpose: Cross-cutting abstractions: shared result, error, and pagination primitives.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+namespace ExaminationSystem.Abstractions;
 
 public class Result
 {
@@ -28,3 +36,4 @@ public class Result<TValue>(TValue? value, bool isSuccess, Error error) : Result
     public TValue Value => IsSuccess ? _value!
         : throw new InvalidOperationException("Failure result cannot have value");
 }
+

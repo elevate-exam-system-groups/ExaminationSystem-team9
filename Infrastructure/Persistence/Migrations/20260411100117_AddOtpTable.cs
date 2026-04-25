@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* File Overview
+ * File: 20260411100117_AddOtpTable.cs
+ * Purpose: EF Core migration artifact: schema evolution code generated/maintained for database versioning.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -53,3 +61,4 @@ namespace ExaminationSystem.Infrastructure.Persistence.Migrations
         }
     }
 }
+

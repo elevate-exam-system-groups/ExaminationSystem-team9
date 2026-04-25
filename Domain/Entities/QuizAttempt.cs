@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Domain.Entities.Authentication;
+﻿/* File Overview
+ * File: QuizAttempt.cs
+ * Purpose: Domain model: core business entities and relationships used across the application.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Enums;
 
 namespace ExaminationSystem.Domain.Entities;
@@ -18,4 +26,6 @@ public class QuizAttempt : BaseEntity
     public ApplicationUser Student { get; set; } = default!; 
     public Quiz Quiz { get; set; } = default!;
     public ICollection<AttemptAnswer> AttemptAnswers { get; set; } = new List<AttemptAnswer>();
+    public QuizAttemptResult? Result { get; set; }
 }
+

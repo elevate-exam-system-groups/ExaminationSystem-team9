@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Domain.Entities.Authentication;
+﻿/* File Overview
+ * File: DependencyInjection.cs
+ * Purpose: Composition root: registers services, infrastructure, and framework integrations in DI.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Domain.Entities.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
 using ExaminationSystem.Domain.Interfaces.Repositories;
 using ExaminationSystem.Infrastructure.Implementations;
@@ -6,6 +14,7 @@ using ExaminationSystem.Infrastructure.Implementations.Authentication;
 using ExaminationSystem.Infrastructure.Implementations.Repositories;
 using ExaminationSystem.Infrastructure.Persistence;
 using ExaminationSystem.Settings;
+using ExaminationSystem.Features.Attempts.Common;
 using FluentValidation;
 using Mapster;
 using MapsterMapper;
@@ -25,6 +34,7 @@ public static class DependencyInjection
            throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddHttpContextAccessor();
 
 
         services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
@@ -42,6 +52,8 @@ public static class DependencyInjection
             .AddMapsterConfig();
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IAttemptLifecycleService, AttemptLifecycleService>();
         services.AddScoped<IEmailSender, EmailService>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
@@ -70,3 +82,4 @@ public static class DependencyInjection
         return services;
     }
 }
+

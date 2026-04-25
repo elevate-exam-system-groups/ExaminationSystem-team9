@@ -1,4 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/* File Overview
+ * File: PaginatedList.cs
+ * Purpose: Cross-cutting abstractions: shared result, error, and pagination primitives.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using Microsoft.EntityFrameworkCore;
 
 namespace ExaminationSystem.Abstractions;
 
@@ -18,3 +26,4 @@ public class PaginatedList<T>(List<T> items, int pageNumber, int count, int page
         return new PaginatedList<T>(items, pageNumber, count, pageSize);
     }
 }
+

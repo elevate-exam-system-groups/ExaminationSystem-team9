@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Domain.Interfaces.Repositories;
+﻿/* File Overview
+ * File: GenericRepository.cs
+ * Purpose: Infrastructure services: concrete implementations for domain/application abstractions.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Domain.Interfaces.Repositories;
 using ExaminationSystem.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -30,3 +38,4 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
         await _context.SaveChangesAsync(cancellationToken);
 }
+

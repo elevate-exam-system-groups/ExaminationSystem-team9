@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Settings;
+﻿/* File Overview
+ * File: EmailService.cs
+ * Purpose: Infrastructure services: concrete implementations for domain/application abstractions.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Settings;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
@@ -35,3 +43,4 @@ public class EmailService(IOptions<MailSettings> mailSettings) : IEmailSender
         smtp.Disconnect(true);
     }
 }
+

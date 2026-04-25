@@ -1,4 +1,12 @@
-﻿using ExaminationSystem.Abstractions;
+﻿/* File Overview
+ * File: AuthController.cs
+ * Purpose: API controller layer: exposes HTTP endpoints, handles request/response mapping, and delegates business logic to MediatR handlers.
+ * Architecture: Clean Architecture with CQRS and MediatR patterns.
+ * Techniques: Dependency Injection, separation of concerns, and maintainable layering conventions.
+ * Libraries: See using directives below (commonly ASP.NET Core, MediatR, EF Core, FluentValidation, Mapster).
+ */
+
+using ExaminationSystem.Abstractions;
 using ExaminationSystem.Domain.DTOs.Authentication;
 using ExaminationSystem.Domain.Interfaces.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -19,3 +27,4 @@ public class AuthController(IAuthService authService) : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 }
+
