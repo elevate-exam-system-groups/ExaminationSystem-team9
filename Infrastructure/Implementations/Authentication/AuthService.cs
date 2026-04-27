@@ -77,12 +77,8 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
 
         if (otpCode.AttemptCount >= 5)
         {
-            otpCode.IsUsed = true;
-
-            _context.OtpCodes.Update(otpCode);
-
+            otpCode.ExpirationDate = DateTime.UtcNow;
             await _context.SaveChangesAsync(cancellationToken);
-
             return Result.Failure(UserErrors.EndOfAttempt);
         }
 
@@ -128,13 +124,30 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
             return Result.Failure(UserErrors.EmailIsConfirmed);
 
         var oldOtpCode = await _context.OtpCodes
-            .FirstOrDefaultAsync(c => c.Email == email && c.UserId == user.Id && !c.IsUsed, cancellationToken);
+            .Where(c => c.Email == email && c.UserId == user.Id && !c.IsUsed)
+            .OrderByDescending(x => x.CreatedAt)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (oldOtpCode is not null && oldOtpCode.ResendCount >= 5)
+            return Result.Failure(UserErrors.TooManyResendAttempts);
 
         if (oldOtpCode is not null)
         {
-            oldOtpCode.IsUsed = true;
-            _context.UpdateRange(oldOtpCode);
+            var newCode = GenerateOtp();
+
+            var updateHashCode = BCrypt.Net.BCrypt.HashPassword(newCode);
+
+            oldOtpCode.Code = updateHashCode;
+            oldOtpCode.ResendCount += 1;
+            oldOtpCode.UpdatedAt = DateTime.UtcNow;
+            oldOtpCode.ExpirationDate = DateTime.UtcNow.AddMinutes(10);
+
+            _context.OtpCodes.Update(oldOtpCode);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await SendConfirmationEmailAsync(user, newCode);
+
+            return Result.Success();
         }
 
         var code = GenerateOtp();
@@ -147,7 +160,8 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
             Email = user.Email!,
             Code = hashCode,
             CreatedAt = DateTime.UtcNow,
-            ExpirationDate = DateTime.UtcNow.AddMinutes(10)
+            ExpirationDate = DateTime.UtcNow.AddMinutes(10),
+            ResendCount = 1
         };
 
         await _context.OtpCodes.AddAsync(otpCode, cancellationToken);
@@ -155,7 +169,7 @@ public class AuthService(UserManager<ApplicationUser> userManager, IEmailSender 
 
         await SendConfirmationEmailAsync(user, code);
 
-        return Result.Success(user.Id);
+        return Result.Success();
     }
 
     public async Task<Result<AuthResponse>> GetTokenAsync(string email, string password, CancellationToken cancellationToken = default)

@@ -35,6 +35,9 @@ public static class UserErrors
     public static readonly Error EndOfAttempt =
     new("User.EndOfAttempt", "you are lost all attempt, Please Generate new Otp", StatusCodes.Status400BadRequest);
 
+    public static readonly Error TooManyResendAttempts =
+    new("User.EndOfResendAttempt", "you are lost all Resend attempt.", StatusCodes.Status400BadRequest);
+
     public static readonly Error EmailIsConfirmed =
     new("Email.EmailIsConfirmed", "Email is already confirmed.", StatusCodes.Status401Unauthorized);
 }
