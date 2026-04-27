@@ -1,17 +1,14 @@
 using ExaminationSystem.DTOs.Authentication;
 using ExaminationSystem.Features.Authentication.Commands.ForgotPassword;
 using ExaminationSystem.Features.Authentication.Commands.ResetPassword;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
-namespace ExaminationSystem.Controllers.Authentication;
+namespace ExaminationSystem.Controllers;
 
 [Route("api/auth")]
 [ApiController]
 public class AuthController(IAuthService _authService, IMediator _mediator) : ControllerBase
 {
 
-    /// <summary>POST /api/auth/register</summary>
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
     {
@@ -41,5 +38,21 @@ public class AuthController(IAuthService _authService, IMediator _mediator) : Co
         var result = await _mediator.Send(command, cancellationToken);
 
         return result.IsSuccess ? Ok() : result.ToProblem();
+    }
+
+    [HttpPost("email-confirm")]
+    public async Task<IActionResult> ConfirmationEmail([FromBody] ConfirmationEmailRequest request, CancellationToken cancellationToken)
+    {
+        var result = await _authService.ConfirmationEmailAsync(request, cancellationToken);
+
+        return result.IsSuccess ? NoContent() : result.ToProblem();
+    }
+
+    [HttpPost("resend-email-confirm")]
+    public async Task<IActionResult> ResendConfirmationEmail([FromBody] ResendConfirmationEmailRequest request, CancellationToken cancellationToken)
+    {
+        var result = await _authService.ResendConfirmationEmailAsync(request.Email, cancellationToken);
+
+        return result.IsSuccess ? NoContent() : result.ToProblem();
     }
 }
