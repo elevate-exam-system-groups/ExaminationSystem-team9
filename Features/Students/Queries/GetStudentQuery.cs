@@ -13,6 +13,6 @@ public class GetStudentQueryHandler(UserManager<ApplicationUser> userManager) : 
         =>
         await _userManager.Users
             .Where(x => x.Id == request.UserId)
-            .ProjectToType<StudentResponse>()
+            .ProjectToType<StudentResponse>() 
             .FirstOrDefaultAsync(cancellationToken);
 }
