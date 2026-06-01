@@ -1,5 +1,4 @@
 ﻿using ExaminationSystem.DTOs.Student;
-using MediatR;
 
 namespace ExaminationSystem.Features.Students.Queries;
 

@@ -24,7 +24,19 @@ public static class UserErrors
     new("Email.EmailNotConfirmed", "Email is not confirmed.", StatusCodes.Status401Unauthorized);
 
     public static readonly Error InvalidCode =
-    new("User.InvalidCode", "Invalid Code.", StatusCodes.Status401Unauthorized);
+    new("User.InvalidOtp", "Invalid otp code.", StatusCodes.Status401Unauthorized);
+
+    public static readonly Error OtpIsExpire =
+    new("User.OtpIsExpire", "Expiration otp code", StatusCodes.Status400BadRequest);
+
+    public static readonly Error OtpIsUsed =
+    new("User.OtpIsUsed", "Otp is used", StatusCodes.Status400BadRequest);
+
+    public static readonly Error EndOfAttempt =
+    new("User.EndOfAttempt", "you are lost all attempt, Please Generate new Otp", StatusCodes.Status400BadRequest);
+
+    public static readonly Error TooManyResendAttempts =
+    new("User.EndOfResendAttempt", "you are lost all Resend attempt.", StatusCodes.Status400BadRequest);
 
     public static readonly Error EmailIsConfirmed =
     new("Email.EmailIsConfirmed", "Email is already confirmed.", StatusCodes.Status401Unauthorized);
